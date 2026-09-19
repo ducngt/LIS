@@ -1,0 +1,79 @@
+{
+  "wire_id": "SW-NUTE-IDENTITY-001",
+  "wire_name": "nute_identity_wire",
+  "version": "0.1.0",
+  "status": "draft",
+
+  "source": {
+    "capability": "lis.identity.nute",
+    "box_id": "SBB-NUTE-IDENTITY-001",
+    "interface": "boxes/nute_identity/interface.json"
+  },
+
+  "targets": [
+    {
+      "type": "assembly",
+      "name": "home_assembly"
+    },
+    {
+      "type": "component",
+      "name": "header_component"
+    },
+    {
+      "type": "component",
+      "name": "footer_component"
+    },
+    {
+      "type": "component",
+      "name": "about_component"
+    }
+  ],
+
+  "validation": {
+    "enabled": true,
+    "required_fields": [
+      "institution_name",
+      "institution_short_name",
+      "institution_english_name",
+      "institution_code",
+      "logo_path",
+      "identity_label"
+    ],
+    "failure_code": "INVALID_IDENTITY_OUTPUT"
+  },
+
+  "transformation": {
+    "semantic_change_allowed": false,
+    "allowed_operations": [
+      "type_validation",
+      "string_normalization",
+      "schema_normalization",
+      "safe_field_mapping"
+    ]
+  },
+
+  "context": {
+    "supported": [
+      "language",
+      "display_context",
+      "theme",
+      "accessibility_preferences"
+    ],
+    "required": []
+  },
+
+  "observability": {
+    "log_source_capability": true,
+    "log_validation_result": true,
+    "log_execution_status": true,
+    "log_error_code": true
+  },
+
+  "constraints": {
+    "creates_identity": false,
+    "renders_ui": false,
+    "assembles_application": false,
+    "may_modify_semantics": false,
+    "executes_logo_path": false
+  }
+}

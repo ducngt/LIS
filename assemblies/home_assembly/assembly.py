@@ -2,12 +2,14 @@ import json
 from pathlib import Path
 
 from boxes.lis_home_hero.box import LISHomeHeroBox
+from boxes.nute_identity.box import NUTEIdentityBox
 from wires.home_hero_wire.wire import HomeHeroWire
+from wires.nute_identity_wire.wire import NUTEIdentityWire
 
 
 class HomeAssembly:
     ASSEMBLY_ID = "ASM-LIS-HOME-001"
-    VERSION = "0.1.0"
+    VERSION = "0.2.0"
 
     def __init__(self):
         self.base_path = Path(__file__).parent
@@ -15,6 +17,9 @@ class HomeAssembly:
 
         self.hero_box = LISHomeHeroBox()
         self.hero_wire = HomeHeroWire()
+
+        self.identity_box = NUTEIdentityBox()
+        self.identity_wire = NUTEIdentityWire()
 
     def load_config(self):
         with open(self.config_path, "r", encoding="utf-8") as file:
@@ -26,16 +31,30 @@ class HomeAssembly:
 
         config = self.load_config()
 
-        box_result = self.hero_box.execute(context=context)
+        # Execute Hero capability
+        hero_box_result = self.hero_box.execute(context=context)
+        hero_wire_result = self.hero_wire.transmit(hero_box_result)
 
-        wire_result = self.hero_wire.transmit(box_result)
-
-        if wire_result["status"] != "success":
+        if hero_wire_result["status"] != "success":
             return {
                 "assembly_id": self.ASSEMBLY_ID,
                 "version": self.VERSION,
                 "status": "error",
-                "error": wire_result
+                "source": "home_hero_wire",
+                "error": hero_wire_result
+            }
+
+        # Execute NUTE Identity capability
+        identity_box_result = self.identity_box.execute(context=context)
+        identity_wire_result = self.identity_wire.transmit(identity_box_result)
+
+        if identity_wire_result["status"] != "success":
+            return {
+                "assembly_id": self.ASSEMBLY_ID,
+                "version": self.VERSION,
+                "status": "error",
+                "source": "nute_identity_wire",
+                "error": identity_wire_result
             }
 
         return {
@@ -45,7 +64,8 @@ class HomeAssembly:
             "assembly_name": config["assembly_name"],
             "component": config["execution"]["output_component"],
             "data": {
-                "hero": wire_result["data"]
+                "identity": identity_wire_result["data"],
+                "hero": hero_wire_result["data"]
             }
         }
 

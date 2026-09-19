@@ -1,7 +1,7 @@
 {
   "assembly_id": "ASM-LIS-HOME-001",
   "assembly_name": "home_assembly",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "draft",
 
   "system": {
@@ -9,7 +9,7 @@
     "full_name": "Learning Intelligence Infrastructure"
   },
 
-  "purpose": "Lắp ráp capability lis.home.hero thành vùng HOME đầu tiên của LIS theo mô hình SBBS.",
+  "purpose": "Lắp ráp các capability nền tảng của HOME theo mô hình SBBS.",
 
   "boxes": [
     {
@@ -17,6 +17,12 @@
       "box_name": "lis_home_hero",
       "capability": "lis.home.hero",
       "interface": "boxes/lis_home_hero/interface.json"
+    },
+    {
+      "box_id": "SBB-NUTE-IDENTITY-001",
+      "box_name": "nute_identity",
+      "capability": "lis.identity.nute",
+      "interface": "boxes/nute_identity/interface.json"
     }
   ],
 
@@ -26,6 +32,12 @@
       "wire_name": "home_hero_wire",
       "interface": "wires/home_hero_wire/interface.json",
       "source_capability": "lis.home.hero"
+    },
+    {
+      "wire_id": "SW-NUTE-IDENTITY-001",
+      "wire_name": "nute_identity_wire",
+      "interface": "wires/nute_identity_wire/interface.json",
+      "source_capability": "lis.identity.nute"
     }
   ],
 
@@ -42,11 +54,19 @@
       "from": "lis.home.hero",
       "via": "home_hero_wire",
       "to": "home"
+    },
+    {
+      "from": "lis.identity.nute",
+      "via": "nute_identity_wire",
+      "to": "home"
     }
   ],
 
   "execution": {
-    "entry_capability": "lis.home.hero",
+    "entry_capabilities": [
+      "lis.home.hero",
+      "lis.identity.nute"
+    ],
     "output_component": "home"
   },
 

@@ -1,0 +1,79 @@
+{
+  "box_id": "SBB-NUTE-IDENTITY-001",
+  "box_name": "nute_identity",
+  "version": "0.1.0",
+  "capability": "lis.identity.nute",
+  "status": "draft",
+
+  "input": {
+    "type": "object",
+    "properties": {
+      "language": {
+        "type": "string",
+        "default": "vi"
+      },
+      "display_context": {
+        "type": ["string", "null"],
+        "default": null
+      }
+    },
+    "required": []
+  },
+
+  "output": {
+    "type": "object",
+    "properties": {
+      "institution_name": {
+        "type": "string"
+      },
+      "institution_short_name": {
+        "type": "string"
+      },
+      "institution_english_name": {
+        "type": "string"
+      },
+      "institution_code": {
+        "type": "string"
+      },
+      "logo_path": {
+        "type": "string"
+      },
+      "identity_label": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "institution_name",
+      "institution_short_name",
+      "institution_english_name",
+      "institution_code",
+      "logo_path",
+      "identity_label"
+    ]
+  },
+
+  "defaults": {
+    "institution_name": "Trường Đại học Sư phạm Kỹ thuật Nam Định",
+    "institution_short_name": "NUTE",
+    "institution_english_name": "Nam Dinh University of Technology Education",
+    "institution_code": "NUTE",
+    "logo_path": "logo/Logo NUTE.jpg",
+    "identity_label": "Trường Đại học Sư phạm Kỹ thuật Nam Định"
+  },
+
+  "constraints": {
+    "framework_independent": true,
+    "contains_html": false,
+    "contains_css": false,
+    "controls_layout": false,
+    "controls_navigation": false,
+    "requires_ai": false
+  },
+
+  "consumers": [
+    "home_assembly",
+    "header_component",
+    "footer_component",
+    "about_component"
+  ]
+}
