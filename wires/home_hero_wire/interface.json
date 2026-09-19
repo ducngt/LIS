@@ -1,0 +1,72 @@
+{
+  "wire_id": "SW-LIS-HOME-HERO-001",
+  "wire_name": "home_hero_wire",
+  "version": "0.1.0",
+  "status": "draft",
+
+  "source": {
+    "capability": "lis.home.hero",
+    "box_id": "SBB-LIS-HOME-HERO-001",
+    "interface": "boxes/lis_home_hero/interface.json"
+  },
+
+  "targets": [
+    {
+      "type": "assembly",
+      "name": "home_assembly"
+    },
+    {
+      "type": "component",
+      "name": "home"
+    }
+  ],
+
+  "validation": {
+    "enabled": true,
+    "required_fields": [
+      "institution_name",
+      "institution_short_name",
+      "lis_name",
+      "lis_full_name",
+      "slogan",
+      "hero_statement",
+      "primary_action_label",
+      "primary_action_target"
+    ],
+    "failure_code": "INVALID_CAPABILITY_OUTPUT"
+  },
+
+  "transformation": {
+    "semantic_change_allowed": false,
+    "allowed_operations": [
+      "type_validation",
+      "string_normalization",
+      "schema_normalization",
+      "safe_field_mapping"
+    ]
+  },
+
+  "context": {
+    "supported": [
+      "language",
+      "user_context",
+      "learner_context",
+      "accessibility_preferences"
+    ],
+    "required": []
+  },
+
+  "observability": {
+    "log_source_capability": true,
+    "log_validation_result": true,
+    "log_execution_status": true,
+    "log_error_code": true
+  },
+
+  "constraints": {
+    "creates_knowledge": false,
+    "renders_ui": false,
+    "assembles_application": false,
+    "may_modify_semantics": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "assembly_id": "ASM-LIS-HOME-001",
+  "assembly_name": "home_assembly",
+  "version": "0.1.0",
+  "status": "draft",
+
+  "system": {
+    "name": "LIS",
+    "full_name": "Learning Intelligence Infrastructure"
+  },
+
+  "purpose": "Lắp ráp capability lis.home.hero thành vùng HOME đầu tiên của LIS theo mô hình SBBS.",
+
+  "boxes": [
+    {
+      "box_id": "SBB-LIS-HOME-HERO-001",
+      "box_name": "lis_home_hero",
+      "capability": "lis.home.hero",
+      "interface": "boxes/lis_home_hero/interface.json"
+    }
+  ],
+
+  "wires": [
+    {
+      "wire_id": "SW-LIS-HOME-HERO-001",
+      "wire_name": "home_hero_wire",
+      "interface": "wires/home_hero_wire/interface.json",
+      "source_capability": "lis.home.hero"
+    }
+  ],
+
+  "components": [
+    {
+      "component_name": "home",
+      "path": "components/home",
+      "role": "presentation"
+    }
+  ],
+
+  "connections": [
+    {
+      "from": "lis.home.hero",
+      "via": "home_hero_wire",
+      "to": "home"
+    }
+  ],
+
+  "execution": {
+    "entry_capability": "lis.home.hero",
+    "output_component": "home"
+  },
+
+  "constraints": {
+    "component_must_not_bypass_wire": true,
+    "assembly_does_not_create_knowledge": true,
+    "assembly_does_not_modify_semantics": true,
+    "assembly_is_declarative": true
+  }
+}

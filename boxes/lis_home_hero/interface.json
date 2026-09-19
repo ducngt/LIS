@@ -1,0 +1,87 @@
+{
+  "box_id": "SBB-LIS-HOME-HERO-001",
+  "box_name": "lis_home_hero",
+  "version": "0.1.0",
+  "capability": "lis.home.hero",
+  "status": "draft",
+
+  "input": {
+    "type": "object",
+    "properties": {
+      "language": {
+        "type": "string",
+        "default": "vi"
+      },
+      "user_context": {
+        "type": ["object", "null"],
+        "default": null
+      }
+    },
+    "required": []
+  },
+
+  "output": {
+    "type": "object",
+    "properties": {
+      "institution_name": {
+        "type": "string"
+      },
+      "institution_short_name": {
+        "type": "string"
+      },
+      "lis_name": {
+        "type": "string"
+      },
+      "lis_full_name": {
+        "type": "string"
+      },
+      "slogan": {
+        "type": "string"
+      },
+      "hero_statement": {
+        "type": "string"
+      },
+      "primary_action_label": {
+        "type": "string"
+      },
+      "primary_action_target": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "institution_name",
+      "institution_short_name",
+      "lis_name",
+      "lis_full_name",
+      "slogan",
+      "hero_statement",
+      "primary_action_label",
+      "primary_action_target"
+    ]
+  },
+
+  "defaults": {
+    "institution_name": "Trường Đại học Sư phạm Kỹ thuật Nam Định",
+    "institution_short_name": "NUTE",
+    "lis_name": "LIS",
+    "lis_full_name": "Learning Intelligence Infrastructure",
+    "slogan": "Kiến tạo - Chuẩn mực",
+    "hero_statement": "LIS là hạ tầng trí tuệ nơi con người và AI cùng tham gia kiến tạo tri thức, phát triển năng lực và hình thành các trải nghiệm học tập, nghiên cứu và sáng tạo mới.",
+    "primary_action_label": "Khám phá LIS",
+    "primary_action_target": "/lis"
+  },
+
+  "constraints": {
+    "framework_independent": true,
+    "contains_html": false,
+    "contains_css": false,
+    "controls_global_routing": false,
+    "requires_ai": false
+  },
+
+  "consumers": [
+    "home_hero_wire",
+    "home_assembly",
+    "home"
+  ]
+}
